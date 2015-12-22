@@ -22,7 +22,7 @@ ext {
     bintrayRepo = 'maven'
     bintrayName = 'obj2es2'
 
-    publishedGroupId = 'com.fernandosierra'
+    publishedGroupId = 'com.fernandosierra.obj2es2'
     libraryName = 'Obj2Es2'
     artifact = 'obj2es2'
 
