@@ -22,10 +22,10 @@ public class Converter {
     private static final String NORMAL_TYPE = "vn ";
     private static final String FACE_TYPE = "f ";
     private static final String FACE_SPLITTER = "/";
-    private final Vector<Float> positions;
-    private final Vector<Float> texels;
-    private final Vector<Float> normals;
-    private final Vector<Integer> faces;
+    private final Vector<Float[]> positions;
+    private final Vector<Float[]> texels;
+    private final Vector<Float[]> normals;
+    private final Vector<Integer[]> faces;
 
     /**
      * Constructor
@@ -40,11 +40,9 @@ public class Converter {
     /**
      * Takes a {@link InputStreamReader} and retrieves a {@link GlEs2Model} object with all the information contained in the obj file.
      *
-     * @param objFile
-     *     Stream to the obj file to be parsed.
+     * @param objFile Stream to the obj file to be parsed.
      * @return A new instance of {@link GlEs2Model} filled with the information from the obj. Can be null.
-     * @throws IOException
-     *     It will trigger if some error occurs during the parsing.
+     * @throws IOException It will trigger if some error occurs during the parsing.
      */
     public GlEs2Model parseObjFile(InputStream objFile) throws IOException {
         if (objFile == null) {
@@ -63,69 +61,79 @@ public class Converter {
     /**
      * Reads the line and determinate what will do with that line.
      *
-     * @param line
-     *     Line to be processed.
+     * @param line Line to be processed.
      */
     private void readLine(String line) {
         if (line.startsWith(VERTEX_TYPE)) {
-            extractPosition(line);
+            extractVertex(line);
         } else if (line.startsWith(TEXEL_TYPE)) {
             extractTexel(line);
         } else if (line.startsWith(NORMAL_TYPE)) {
             extractNormal(line);
         } else if (line.startsWith(FACE_TYPE)) {
-            StringTokenizer tokenizer = new StringTokenizer(line.substring(FACE_TYPE.length()), SPACE);
-            extractFaceIndexes(tokenizer.nextToken());
-            extractFaceIndexes(tokenizer.nextToken());
-            extractFaceIndexes(tokenizer.nextToken());
+            extractFace(line);
         }
     }
 
     /**
      * Takes the group of indexes and extract the values.
      *
-     * @param group
-     *     Group of indexes(v/vt/vn).
+     * @param line Line with the indexes(v/vt/vn).
      */
-    private void extractFaceIndexes(String group) {
-        faces.add(Integer.parseInt(group.split(FACE_SPLITTER)[0]));
+    private void extractFace(String line) {
+        StringTokenizer tokenizer = new StringTokenizer(line.substring(FACE_TYPE.length()), SPACE);
+        Integer[] array = new Integer[9];
+        for (int i = 0; i < 3; i++) {
+            String group = tokenizer.nextToken();
+            String[] values = group.split(FACE_SPLITTER);
+            for (int j = 0; j < values.length; j++) {
+                array[(i * 3) + j] = Integer.parseInt(values[j]);
+            }
+        }
+        faces.add(array);
     }
 
     /**
      * Takes the line and extract the normal values.
      *
-     * @param line
-     *     Line with the normal values (X Y Z).
+     * @param line Line with the normal values (X Y Z).
      */
     private void extractNormal(String line) {
         StringTokenizer tokenizer = new StringTokenizer(line.substring(NORMAL_TYPE.length()), SPACE);
-        normals.add(Float.parseFloat(tokenizer.nextToken()));
-        normals.add(Float.parseFloat(tokenizer.nextToken()));
-        normals.add(Float.parseFloat(tokenizer.nextToken()));
+        Float[] array = {
+                Float.parseFloat(tokenizer.nextToken()),
+                Float.parseFloat(tokenizer.nextToken()),
+                Float.parseFloat(tokenizer.nextToken()),
+        };
+        normals.add(array);
     }
 
     /**
      * Takes the line and extract the texel values.
      *
-     * @param line
-     *     Line with the texel values (U V).
+     * @param line Line with the texel values (U V).
      */
     private void extractTexel(String line) {
         StringTokenizer tokenizer = new StringTokenizer(line.substring(TEXEL_TYPE.length()), SPACE);
-        texels.add(Float.parseFloat(tokenizer.nextToken()));
-        texels.add(Float.parseFloat(tokenizer.nextToken()));
+        Float[] array = {
+                Float.parseFloat(tokenizer.nextToken()),
+                Float.parseFloat(tokenizer.nextToken())
+        };
+        texels.add(array);
     }
 
     /**
      * Takes the line and extract the vertex values.
      *
-     * @param line
-     *     Line with the vertex values (X Y Z);
+     * @param line Line with the vertex values (X Y Z);
      */
-    private void extractPosition(String line) {
+    private void extractVertex(String line) {
         StringTokenizer tokenizer = new StringTokenizer(line.substring(VERTEX_TYPE.length()), SPACE);
-        positions.add(Float.parseFloat(tokenizer.nextToken()));
-        positions.add(Float.parseFloat(tokenizer.nextToken()));
-        positions.add(Float.parseFloat(tokenizer.nextToken()));
+        Float[] array = {
+                Float.parseFloat(tokenizer.nextToken()),
+                Float.parseFloat(tokenizer.nextToken()),
+                Float.parseFloat(tokenizer.nextToken())
+        };
+        positions.add(array);
     }
 }

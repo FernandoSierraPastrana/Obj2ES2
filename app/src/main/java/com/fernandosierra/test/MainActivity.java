@@ -32,9 +32,6 @@ public class MainActivity extends AppCompatActivity {
                 "Normal[0] = (" + model.getNormals().getFloat() + ", " + model.getNormals().getFloat() + ", " + model.getNormals()
                     .getFloat() + ")");
             Log.i(TAG_LOG, "Texel[0] = (" + model.getTexels().getFloat() + ", " + model.getTexels().getFloat() + ")");
-            Log.i(TAG_LOG,
-                "Face[0] = (" + model.getFaces().getInt() + ", " + model.getFaces().getInt() + ", " + model.getFaces().getInt() + ")");
-
         }
         catch (IOException e) {
             Log.e(TAG_LOG, e.getMessage(), e);
