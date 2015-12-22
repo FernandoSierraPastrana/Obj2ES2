@@ -20,6 +20,7 @@ public class GlEs2Model {
     protected ByteBuffer mVertexes;
     protected ByteBuffer mTexels;
     protected ByteBuffer mNormals;
+    protected int mIndexes;
 
     /**
      * Constructor
@@ -31,6 +32,7 @@ public class GlEs2Model {
      */
     public GlEs2Model(Vector<Float[]> vertexes, Vector<Float[]> texels, Vector<Float[]> normals, Vector<Integer[]> faces) {
         int size = faces.size();
+        mIndexes = size * 3;
         float[] vertexesArray = new float[size * 9];
         float[] texelsArray = new float[size * 6];
         float[] normalsArray = new float[size * 9];
@@ -158,5 +160,9 @@ public class GlEs2Model {
 
     public ByteBuffer getNormals() {
         return mNormals;
+    }
+
+    public int getIndexes() {
+        return mIndexes;
     }
 }
