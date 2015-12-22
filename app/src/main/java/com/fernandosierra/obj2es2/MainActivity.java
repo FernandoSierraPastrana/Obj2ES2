@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String TAG = "Obj2ES2";
+    public static final String TAG_LOG = "Obj2ES2";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,16 +21,20 @@ public class MainActivity extends AppCompatActivity {
         try {
             long start = System.currentTimeMillis();
             GlEs2Model model = converter.parseObjFile(assetManager.open("example.obj"));
-            Log.i(TAG, "Execution time=" + (System.currentTimeMillis() - start) + "ms");
-            Log.i(TAG, "Vertex[0] = (" + model.getPositions()[0] + ", " + model.getPositions()[1] + ", " + model.getPositions()[2] + ")");
-            Log.i(TAG, "Normal[0] = (" + model.getNormals()[0] + ", " + model.getNormals()[1] + ", " + model.getNormals()[2] + ")");
-            Log.i(TAG, "Texel[0] = (" + model.getTexels()[0] + ", " + model.getTexels()[1] + ")");
-            Log.i(TAG, "Face[0] = (" + model.getFaces()[0] + "/" + model.getFaces()[1] + "/" + model.getFaces()[2] +
-                       ", " + model.getFaces()[3] + "/" + model.getFaces()[4] + "/" + model.getFaces()[5] +
-                       ", " + model.getFaces()[6] + "/" + model.getFaces()[7] + "/" + model.getFaces()[8] + ")");
+            Log.i(TAG_LOG, "Execution time=" + (System.currentTimeMillis() - start) + "ms");
+            Log.i(TAG_LOG,
+                "Vertex[0] = (" + model.getVertexes().getFloat() + ", " + model.getVertexes().getFloat() + ", " + model.getVertexes()
+                    .getFloat() + ")");
+            Log.i(TAG_LOG,
+                "Normal[0] = (" + model.getNormals().getFloat() + ", " + model.getNormals().getFloat() + ", " + model.getNormals()
+                    .getFloat() + ")");
+            Log.i(TAG_LOG, "Texel[0] = (" + model.getTexels().getFloat() + ", " + model.getTexels().getFloat() + ")");
+            Log.i(TAG_LOG,
+                "Face[0] = (" + model.getFaces().getInt() + ", " + model.getFaces().getInt() + ", " + model.getFaces().getInt() + ")");
 
-        } catch (IOException e) {
-            Log.e(TAG, e.getMessage(), e);
+        }
+        catch (IOException e) {
+            Log.e(TAG_LOG, e.getMessage(), e);
         }
     }
 }
