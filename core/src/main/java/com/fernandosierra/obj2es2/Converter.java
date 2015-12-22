@@ -22,10 +22,10 @@ public class Converter {
     private static final String NORMAL_TYPE = "vn ";
     private static final String FACE_TYPE = "f ";
     private static final String FACE_SPLITTER = "/";
-    private Vector<Float> positions;
-    private Vector<Float> texels;
-    private Vector<Float> normals;
-    private Vector<Integer> faces;
+    private final Vector<Float> positions;
+    private final Vector<Float> texels;
+    private final Vector<Float> normals;
+    private final Vector<Integer> faces;
 
     /**
      * Constructor
@@ -85,12 +85,10 @@ public class Converter {
      * Takes the group of indexes and extract the values.
      *
      * @param group
-     *     Group of indexes(X/Y/Z).
+     *     Group of indexes(v/vt/vn).
      */
     private void extractFaceIndexes(String group) {
-        for (String value : group.split(FACE_SPLITTER)) {
-            faces.add(Integer.parseInt(value));
-        }
+        faces.add(Integer.parseInt(group.split(FACE_SPLITTER)[0]));
     }
 
     /**
