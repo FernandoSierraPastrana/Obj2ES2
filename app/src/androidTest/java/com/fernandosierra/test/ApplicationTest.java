@@ -1,4 +1,4 @@
-package com.fernandosierra.obj2es2;
+package com.fernandosierra.test;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.fernandosierra.obj2es2"
+        applicationId "com.fernandosierra.test"
         minSdkVersion 10
         targetSdkVersion 23
         versionCode 1

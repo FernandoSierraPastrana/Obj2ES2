@@ -1,9 +1,12 @@
-package com.fernandosierra.obj2es2;
+package com.fernandosierra.test;
 
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+
+import com.fernandosierra.obj2es2.Converter;
+import com.fernandosierra.obj2es2.GlEs2Model;
 
 import java.io.IOException;
 

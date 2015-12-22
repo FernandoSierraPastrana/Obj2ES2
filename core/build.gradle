@@ -1,4 +1,49 @@
-apply plugin: 'java'
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        minSdkVersion 10
+        targetSdkVersion 23
+        versionCode 1
+        versionName "0.1.1"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'obj2es2'
+
+    publishedGroupId = 'com.fernandosierra'
+    libraryName = 'Obj2Es2'
+    artifact = 'obj2es2'
+
+    libraryDescription = 'Library to import an obj file into OpenGL ES 2.0 for Android.'
+
+    siteUrl = 'https://github.com/FernandoSierraPastrana/Obj2ES2'
+    gitUrl = 'https://github.com/FernandoSierraPastrana/Obj2ES2.git'
+
+    libraryVersion = '0.1.1'
+
+    developerId = 'fernandosierrapastrana'
+    developerName = 'Fernando Sierra'
+    developerEmail = 'fernando.sierra.pastrana@gmail.com'
+
+    licenseName = 'GNU General Public License, version 2'
+    licenseUrl = 'http://opensource.org/licenses/gpl-2.0.php'
+    allLicenses = ["GPL-2.0"]
+}
+
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
