@@ -20,7 +20,7 @@ android {
 
 ext {
     bintrayRepo = 'maven'
-    bintrayName = 'obj2es2'
+    bintrayName = 'Obj2Es2'
 
     publishedGroupId = 'com.fernandosierra.obj2es2'
     libraryName = 'Obj2Es2'
